@@ -3,7 +3,7 @@ import { AxiosError } from 'axios';
 
 import { FetchUserDataReturn, SearchState } from './types';
 import service from 'service/apiService';
-import { DEFAULT_ERROR_MESSAGE } from 'Constants';
+import { DEFAULT_ERROR_MESSAGE } from 'appConstants';
 
 const initialState: SearchState = {
   query: '',
@@ -17,6 +17,7 @@ export const fetchUserData = createAsyncThunk<FetchUserDataReturn, string, { rej
   'search/fetchSearch',
   async (userName, { rejectWithValue }) => {
     if (!userName.length) {
+      //FIXME: length?
       return null;
     }
 
@@ -60,6 +61,7 @@ export const searchSlice = createSlice({
         state.isLoading = false;
 
         if (payload === 'Not Found') {
+          //FIXME:
           state.result = { user: null, repos: null };
         } else {
           state.errorMessage = payload || DEFAULT_ERROR_MESSAGE;

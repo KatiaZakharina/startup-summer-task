@@ -9,7 +9,7 @@ type Props = {
 export const RepositoryCard = ({ name, description, link }: Props) => {
   return (
     <StyledRepositoryCard>
-      <Name href={link} target="_blank" rel="noreferrer">
+      <Name href={link} target="_blank">
         {name}
       </Name>
       <p>{description}</p>

@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { SERVER_URI } from 'appConstants';
+
 export type User = {
   login: string;
   name: string | null;
@@ -16,7 +18,7 @@ export type Repo = {
 };
 
 class ApiService {
-  baseUrl = 'https://api.github.com';
+  baseUrl = SERVER_URI;
   axiosInstance = axios.create({ baseURL: this.baseUrl });
 
   async getUser(userName: string): Promise<User> {

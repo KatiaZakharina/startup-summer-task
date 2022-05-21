@@ -4,7 +4,7 @@ import searchIcon from 'assets/svg/search.svg';
 import userIcon from 'assets/svg/user.svg';
 import crossIcon from 'assets/svg/rep.svg';
 
-type SearchResult = 'empty_search' | 'empty_user' | 'empty_repository_list';
+type SearchResult = 'initial_search' | 'user_not_found' | 'empty_repository_list';
 
 type Props = {
   searchResult: SearchResult;
@@ -18,14 +18,14 @@ type Details = {
   };
 };
 
-export const EmptySearchResult = ({ searchResult }: Props) => {
+export const SearchState = ({ searchResult }: Props) => {
   const details: Details = {
-    empty_search: {
+    initial_search: {
       message: 'Start with searching a GitHub user',
       icon: searchIcon,
       alt: 'search icon',
     },
-    empty_user: {
+    user_not_found: {
       message: 'User not found',
       icon: userIcon,
       alt: 'person icon',

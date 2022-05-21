@@ -23,7 +23,7 @@ export const UserInfo = () => {
       <Avatar src={user.avatar_url} />
       <div>
         <UserName>{user.name}</UserName>
-        <RepositoryName href={user.html_url} target="_blank" rel="noreferrer">
+        <RepositoryName href={user.html_url} target="_blank">
           {user.login}
         </RepositoryName>
         <InfoList>

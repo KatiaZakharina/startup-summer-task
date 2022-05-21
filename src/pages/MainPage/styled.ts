@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { LIGHT_GRAY } from 'styles/constant';
 import { Container } from 'components/layout/Containers';
-import { StyledResult } from 'components/EmptySearchResult/styled';
+import { StyledResult } from './SearchState/styled';
 
 export const Main = styled.main`
   display: flex;
