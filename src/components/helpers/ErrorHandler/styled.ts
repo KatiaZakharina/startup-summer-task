@@ -4,25 +4,25 @@ import { DARK_GRAY, LIGHT_GRAY } from 'styles/constant';
 
 export const StyledErrorSection = styled.div`
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 50px;
+  flex: 1 1 auto;
+  gap: 10px 50px;
   padding: 30px;
   background-color: ${LIGHT_GRAY};
 `;
 
 export const ErrorImg = styled.img.attrs({ alt: 'error illustration' })`
-  width: 30vw;
-  height: 30vw;
-  max-width: 250px;
+  width: 35vw;
+  height: 28vw;
+  max-width: 305px;
   max-height: 250px;
   object-fit: cover;
 `;
 
 export const ErrorDescription = styled.div`
-  max-width: 40vw;
+  max-width: 20vw;
   min-width: 180px;
   font-size: 1.5rem;
   font-weight: 700;

@@ -1,7 +1,6 @@
 import { ReactElement } from 'react';
 
 import { ErrorDescription, ErrorImg, Message, StyledErrorSection } from './styled';
-
 import error from 'assets/svg/error.svg';
 
 type ErrorSectionProps = { message?: string; children: ReactElement };

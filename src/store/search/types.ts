@@ -10,6 +10,7 @@ export type SearchState = {
   result: null | UserData;
   errorMessage: string;
   currentPage: number;
+  isLoading: boolean;
 };
 
 export type FetchUserDataReturn = {

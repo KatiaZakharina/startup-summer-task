@@ -3,12 +3,14 @@ import { AxiosError } from 'axios';
 
 import { FetchUserDataReturn, SearchState } from './types';
 import service from 'service/apiService';
+import { DEFAULT_ERROR_MESSAGE } from 'Constants';
 
 const initialState: SearchState = {
   query: '',
   result: null,
   errorMessage: '',
   currentPage: 1,
+  isLoading: false,
 };
 
 export const fetchUserData = createAsyncThunk<FetchUserDataReturn, string, { rejectValue: string }>(
@@ -26,7 +28,7 @@ export const fetchUserData = createAsyncThunk<FetchUserDataReturn, string, { rej
       if (error instanceof AxiosError) {
         return rejectWithValue(error?.response?.data.message);
       } else {
-        return rejectWithValue('Sorry, something went wrong');
+        return rejectWithValue(DEFAULT_ERROR_MESSAGE);
       }
     }
   }
@@ -48,15 +50,19 @@ export const searchSlice = createSlice({
       .addCase(fetchUserData.pending, (state) => {
         state.result = null;
         state.errorMessage = '';
+        state.isLoading = true;
       })
       .addCase(fetchUserData.fulfilled, (state, { payload }) => {
         state.result = payload;
+        state.isLoading = false;
       })
-      .addCase(fetchUserData.rejected, (state, { payload = 'Something went wrong...' }) => {
+      .addCase(fetchUserData.rejected, (state, { payload }) => {
+        state.isLoading = false;
+
         if (payload === 'Not Found') {
           state.result = { user: null, repos: null };
         } else {
-          state.errorMessage = payload;
+          state.errorMessage = payload || DEFAULT_ERROR_MESSAGE;
         }
       });
   },
