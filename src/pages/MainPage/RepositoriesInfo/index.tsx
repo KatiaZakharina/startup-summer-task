@@ -1,57 +1,47 @@
 import { useEffect, useState } from 'react';
 
 import { RepositoryCard } from 'components/RepositoryCard';
+import { CurrentItems, Pagination, RepositoryList, StyledReactPaginate } from './styled';
+import { useAppSelector } from 'store/hooks';
+import { Repo } from 'service/apiService';
 
-import {
-  CurrentItems,
-  Pagination,
-  RepositoryCount,
-  RepositoryList,
-  StyledReactPaginate,
-  StyledRepositoriesInfo,
-} from './styled';
-
-const items = Array(50)
-  .fill(0)
-  .map((_, index) => index + 1);
-
-const RepositoriesList = ({ currentItems }: { currentItems: number[] }) => {
+const RepositoriesList = ({ currentItems }: { currentItems: Repo[] }) => {
   return (
-    <>
-      <RepositoryCount>Repositories (249)</RepositoryCount>
-      <RepositoryList>
-        {currentItems &&
-          currentItems.map((item, index) => (
-            <RepositoryCard
-              key={index}
-              name={`react-hot-loader ${item}`}
-              description="Tweak React components in real time. (Deprecated: use Fast Refresh instead."
-            />
-          ))}
-      </RepositoryList>
-    </>
+    <RepositoryList>
+      {currentItems &&
+        currentItems.map((item, index) => (
+          <RepositoryCard
+            key={index}
+            name={item.name}
+            description={item.description}
+            link={item.html_url}
+          />
+        ))}
+    </RepositoryList>
   );
 };
 
 export const RepositoriesInfo = ({ itemsPerPage }: { itemsPerPage: number }) => {
-  const [currentItems, setCurrentItems] = useState<number[] | null>(null);
+  const repos = useAppSelector((state) => state.searchReducer.result?.repos)!;
+
+  const [currentItems, setCurrentItems] = useState<Repo[] | null>(null);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
 
-    setCurrentItems(items.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(items.length / itemsPerPage));
+    setCurrentItems(repos.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(repos.length / itemsPerPage));
   }, [itemOffset, itemsPerPage]);
 
   const handlePageClick = (event: { selected: number }) => {
-    const newOffset = (event.selected * itemsPerPage) % items.length;
+    const newOffset = (event.selected * itemsPerPage) % repos.length;
     setItemOffset(newOffset);
   };
 
   return (
-    <StyledRepositoriesInfo>
+    <>
       <RepositoriesList currentItems={currentItems!} />
 
       <Pagination>
@@ -73,6 +63,6 @@ export const RepositoriesInfo = ({ itemsPerPage }: { itemsPerPage: number }) => 
           />
         </nav>
       </Pagination>
-    </StyledRepositoriesInfo>
+    </>
   );
 };

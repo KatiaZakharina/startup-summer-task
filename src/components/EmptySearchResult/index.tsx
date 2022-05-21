@@ -4,7 +4,7 @@ import searchIcon from 'assets/svg/search.svg';
 import userIcon from 'assets/svg/user.svg';
 import crossIcon from 'assets/svg/rep.svg';
 
-type SearchResult = 'empty_search' | 'empty_user_list' | 'empty_repository_list';
+type SearchResult = 'empty_search' | 'empty_user' | 'empty_repository_list';
 
 type Props = {
   searchResult: SearchResult;
@@ -25,7 +25,7 @@ export const EmptySearchResult = ({ searchResult }: Props) => {
       icon: searchIcon,
       alt: 'search icon',
     },
-    empty_user_list: {
+    empty_user: {
       message: 'User not found',
       icon: userIcon,
       alt: 'person icon',

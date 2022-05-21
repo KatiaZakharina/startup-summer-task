@@ -35,6 +35,7 @@ export const UserName = styled.h1`
 
 export const RepositoryName = styled.a`
   color: ${BLUE};
+  text-decoration: none;
 `;
 
 export const InfoList = styled.ul`

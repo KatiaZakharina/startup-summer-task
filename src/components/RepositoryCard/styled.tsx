@@ -7,9 +7,11 @@ export const StyledRepositoryCard = styled.div`
   background-color: ${WHITE};
 `;
 
-export const Name = styled.h3`
+export const Name = styled.a`
+  display: block;
   margin-bottom: 1rem;
   font-size: 1.6rem;
   font-weight: 500;
   color: ${BLUE};
+  text-decoration: none;
 `;

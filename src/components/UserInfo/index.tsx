@@ -8,29 +8,36 @@ import {
   StyledUserInfo,
   UserName,
 } from './styled';
+import { useAppSelector } from 'store/hooks';
 
 import personIcon from 'assets/svg/person.svg';
 import peopleIcon from 'assets/svg/people.svg';
+import { kNumberFormatter } from 'utils/kNumberFormatter';
 
 export const UserInfo = () => {
-  return (
+  const user = useAppSelector((state) => state.searchReducer.result?.user);
+  //FIXME:
+
+  return user ? (
     <StyledUserInfo>
-      <Avatar src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" />
+      <Avatar src={user.avatar_url} />
       <div>
-        <UserName>Dan Abramov</UserName>
-        <RepositoryName>gaearon</RepositoryName>
+        <UserName>{user.name}</UserName>
+        <RepositoryName href={user.html_url} target="_blank" rel="noreferrer">
+          {user.login}
+        </RepositoryName>
         <InfoList>
           <InfoItem>
             <Icon bgImage={peopleIcon} />
-            <Info>65.8k followers</Info>
+            <Info>{kNumberFormatter(user.followers)} followers</Info>
           </InfoItem>
 
           <InfoItem>
             <Icon bgImage={personIcon} />
-            <Info>171 following</Info>
+            <Info>{kNumberFormatter(user.following)} following</Info>
           </InfoItem>
         </InfoList>
       </div>
     </StyledUserInfo>
-  );
+  ) : null;
 };

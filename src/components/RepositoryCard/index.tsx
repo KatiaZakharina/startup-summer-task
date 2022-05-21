@@ -3,12 +3,15 @@ import { Name, StyledRepositoryCard } from './styled';
 type Props = {
   name: string;
   description: string;
+  link: string;
 };
 
-export const RepositoryCard = ({ name, description }: Props) => {
+export const RepositoryCard = ({ name, description, link }: Props) => {
   return (
     <StyledRepositoryCard>
-      <Name>{name}</Name>
+      <Name href={link} target="_blank" rel="noreferrer">
+        {name}
+      </Name>
       <p>{description}</p>
     </StyledRepositoryCard>
   );
