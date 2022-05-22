@@ -10,10 +10,6 @@ export type SearchState = {
   result: null | UserData;
   errorMessage: string;
   currentPage: number;
-  isLoading: boolean;
+  userIsLoading: boolean;
+  reposIsLoading: boolean;
 };
-
-export type FetchUserDataReturn = {
-  user: User;
-  repos: Repo[];
-} | null;

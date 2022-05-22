@@ -1,12 +1,13 @@
 import axios from 'axios';
 
-import { SERVER_URI } from 'appConstants';
+import { REPO_PER_PAGE, SERVER_URI } from 'appConstants';
 
 export type User = {
   login: string;
   name: string | null;
   avatar_url: string;
   html_url: string;
+  public_repos: number;
   followers: number;
   following: number;
 };
@@ -26,8 +27,10 @@ class ApiService {
     return data;
   }
 
-  async getRepositories(userName: string): Promise<Repo[]> {
-    const { data } = await this.axiosInstance.get(`/users/${userName}/repos`);
+  async getRepositories(userName: string, page: number): Promise<Repo[]> {
+    const { data } = await this.axiosInstance.get(
+      `users/${userName}/repos?q=&per_page=${REPO_PER_PAGE}&page=${page}`
+    );
     return data;
   }
 }

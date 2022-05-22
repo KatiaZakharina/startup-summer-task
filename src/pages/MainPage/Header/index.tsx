@@ -1,9 +1,9 @@
 import { ChangeEvent, FormEvent } from 'react';
 
 import { Logo, Search, StyledHeader } from './styled';
-import { Container } from '../layout/Containers';
+import { Container } from 'components/layout/Containers';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { changeSearch, fetchUserData } from 'store/search/searchSlice';
+import { changePage, changeSearch, fetchReposData, fetchUserData } from 'store/search/searchSlice';
 
 import gitHubLogo from 'assets/svg/github_logo.svg';
 
@@ -15,9 +15,14 @@ export const Header = () => {
     dispatch(changeSearch(event.target.value));
   };
 
-  const onSearchRequest = (event: FormEvent<HTMLFormElement>) => {
+  const onSearchRequest = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(fetchUserData(search));
+    const userResponse = await dispatch(fetchUserData(search));
+
+    dispatch(changePage(1));
+    if (userResponse.meta.requestStatus !== 'rejected') {
+      dispatch(fetchReposData({ userName: search, page: 1 }));
+    }
   };
 
   return (
@@ -31,6 +36,7 @@ export const Header = () => {
             name="username"
             value={search}
             onChange={onSearchChange}
+            autoComplete="off"
           />
         </form>
       </Container>

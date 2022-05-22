@@ -8,11 +8,11 @@ import { useAppSelector } from 'store/hooks';
 
 export const MainPage = () => {
   const result = useAppSelector((state) => state.searchReducer.result);
-  const { errorMessage, isLoading } = useAppSelector((state) => state.searchReducer);
+  const { errorMessage, userIsLoading } = useAppSelector((state) => state.searchReducer);
 
   return (
     <ErrorHandler message={errorMessage}>
-      <LoadingWrapper isLoading={isLoading}>
+      <LoadingWrapper isLoading={userIsLoading}>
         <Main>
           {!result ? (
             <SearchState searchResult="initial_search" />
