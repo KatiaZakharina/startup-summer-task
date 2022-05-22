@@ -6,4 +6,8 @@ export const Container = styled.div`
   width: calc(100vw - 82px);
   max-width: 1440px;
   margin: 0 auto;
+
+  @media (max-width: 480px) {
+    width: calc(100vw - 20px);
+  }
 `;

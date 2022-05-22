@@ -17,6 +17,7 @@ export const Spinner = styled.div`
   background: conic-gradient(${LIGHT_GRAY}, ${BLUE});
   animation: ${spin} 1.4s linear infinite;
   transform: translateZ(0);
+
   &::after {
     position: absolute;
     content: '';
@@ -39,6 +40,7 @@ export const SpinnerWrapper = styled.div`
   flex: 1 1 auto;
   font-size: 1.3rem;
   color: ${BLACK};
+
   ${Spinner} {
     margin-right: 20px;
   }

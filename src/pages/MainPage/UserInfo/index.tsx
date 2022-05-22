@@ -16,7 +16,6 @@ import { kNumberFormatter } from 'utils/kNumberFormatter';
 
 export const UserInfo = () => {
   const user = useAppSelector((state) => state.searchReducer.result?.user);
-  //FIXME:
 
   return user ? (
     <StyledUserInfo>

@@ -11,7 +11,7 @@ export const Pagination = styled.div`
   flex-wrap: wrap;
   gap: 1rem;
 
-  margin-top: 1.5rem;
+  margin: 1.5rem 0 1.75rem;
   font-size: 0.8rem;
   color: ${DARK_GRAY};
 `;
